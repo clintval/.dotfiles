@@ -1,0 +1,10 @@
+{
+    "type": "sftp",
+    "sync_down_on_open": true,
+    "sync_same_age": true,
+    "host": "bmc-pub7.mit.edu",
+    "user": "clintv",
+    "remote_path": "/data1/essigmannlab1/users/clintv",
+    "connect_timeout": 30,
+}
+
