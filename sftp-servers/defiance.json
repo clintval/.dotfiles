@@ -1,0 +1,10 @@
+{
+    "type": "sftp",
+    "sync_down_on_open": true,
+    "sync_same_age": true,
+    "host": "defiance.neu.edu",
+    "user": "valentine.c",
+    "remote_path": "/home/valentine.c",
+    "connect_timeout": 30,
+}
+
