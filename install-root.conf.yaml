@@ -1,0 +1,15 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- shell:
+  - command: "[ -d /opt/liquidprompt ] || git clone https://github.com/nojhan/liquidprompt.git /opt/liquidprompt"
+    description: Cloning `liquidprompt`.
+
+  - command: "[ -d /opt/pure ] || git clone https://github.com/sindresorhus/pure.git /opt/pure"
+    description: Cloning `pure`.
+
+- link:
+    /usr/local/share/zsh/site-functions/prompt_pure_setup: /opt/pure/pure.zsh
+    /usr/local/share/zsh/site-functions/async: /opt/pure/async.zsh

@@ -1,0 +1,17 @@
+bamtools
+bcftools
+bedops
+bedtools
+blast+-bin
+bwa
+circos
+google-cloud-sdk
+htslib
+igv
+perl-cpanplus-dist-arch
+picard-tools
+primer3
+repeatmasker
+samtools
+vcftools
+viennarna
