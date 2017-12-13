@@ -1,0 +1,24 @@
+[Animation]
+Frames=10
+
+[Appearance]
+TerminalHighlightOnManualActivation=true
+
+[Behavior]
+OpenAfterStart=true
+
+[Desktop Entry]
+DefaultProfile=Clint.profile
+
+[Favorite Profiles]
+Favorites=
+
+[Window]
+Height=100
+KeepAbove=false
+KeepOpen=true
+Position=100
+Screen=2
+ShowOnAllDesktops=false
+ShowTabBar=false
+Width=100
