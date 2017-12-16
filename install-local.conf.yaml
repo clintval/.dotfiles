@@ -41,8 +41,14 @@
     ~/.local/share/konsole/Clint.profile: konsole/Clint.profile
 
 - shell:
-  - command: sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-    description: Installing `zsh`.
+  - command: oh-my-zsh/tools/install.sh
+    stdout: true
+    stderr: true
+    description: Installing oh-my-zsh
+
+- link:
+    ~/.zfunctions/prompt_pure_setup: pure/pure.zsh
+    ~/.zfunctions/async: pure/async.zsh
 
 # PEACOCKS IN SPACE
 # #26A6A6

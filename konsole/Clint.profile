@@ -1,7 +1,7 @@
 [Appearance]
 AntiAliasFonts=true
 BoldIntense=true
-ColorScheme=Breeze
+ColorScheme=PeacocksInSpace
 Font=Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
 LineSpacing=1
 UseFontLineChararacters=true

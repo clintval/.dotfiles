@@ -1,115 +1,33 @@
 #!/usr/bin/env bash
-# If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=/opt/catgenome/cli/ngb-cli/bin:$PATH
-export PATH=/home/clint/pipelines/duplexseq/packages/VarDictJava/build/install/VarDict/bin:$PATH
-export PATH=/usr/lib/RepeatMasker/util:$PATH}}
 
-# Path to your oh-my-zsh installation.
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=/home/clint/.oh-my-zsh
 
-source ~/.exports
+plugins=(
+    archlinux
+    battery
+    colored-man-pages
+    aws
+    git
+    systemd
+    taskwarrior
+    vagrant
+    zsh_reload)
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
-# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# Old: robbyrussell
-ZSH_THEME="robbyrussell"
+fpath=( "$HOME/.zfunctions" $fpath )
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-source /etc/profile.d/fzf.zsh
+source "${ZSH}/oh-my-zsh.sh"
 
 # USER CONFIGURATION ##########################################################
 
-EDITOR=subl3
-
-export PS1='${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
-
-# Color man pages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+  export EDITOR='nano'
 else
-  export EDITOR='subl3'
+  export EDITOR='nano'
   export VISUAL='subl3'
 fi
 
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-
-# BLAST CLI
-export BLASTDB=/blast/db
-
-export PYENSEMBL_CACHE_DIR=~/scratch
-
 # ALIASES #####################################################################
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
 
 alias zshconfig="subl3 ~/.zshrc"
 alias ohmyzsh="subl3 ~/.oh-my-zsh"
@@ -143,7 +61,6 @@ alias .=source
 
 alias igv='igv > /dev/null 2>&1 &'
 alias xclip='xclip -selection c'
-alias lollipops='/home/clint/go/bin/lollipops'
 
 alias cls=clear
 alias w3m='w3m -o ext_image_viewer=0'
@@ -171,7 +88,7 @@ bindkey '\e[Z' menu-complete-backward
 # HISTORY #####################################################################
 
 export HISTFILESIZE=20000
-export HISTSIZE=10000
+export HISTSIZE=100000
 
 # Combine multiline commands into one in history
 # Ignore duplicates, ls without options and builtin commands
@@ -188,7 +105,6 @@ s() { # do sudo, or sudo the last command if no argument given
         sudo "$@"
     fi
 }
-
 
 # Print the relative working directory
 relwd () {
@@ -359,16 +275,10 @@ function random-string {
     cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w "${length}" | head -n 1
 }
 
-function nyancat {
-    telnet nyancat.dakko.us
-}
-
-
 function get-permissions {
     find   \( -type f -a \( \( ! -group root -o ! -user root \) -o \( ! -perm 755 -a ! -perm 644 \) \) \) \
         -o \( -type d -a \( ! -group root -o ! -user root -o ! -perm 755 \) \) \
         | while read line; do stat -c "%u %g %a %n" $line ; done
-
 }
 
 function set-default-file-dir-permissions {
@@ -402,13 +312,7 @@ function submit {
     aws s3 cp ${config} s3://twinstrand-queue/to-aws/ ${@}
 }
 
-# SAY HELLO TO ME #############################################################
-
-#/usr/bin/screenfetch; echo
-
-# Only load Liquid Prompt in interactive shells, not from a script or from scp
-#[[ $- = *i* ]] && source ~/repos/liquidprompt/liquidprompt
-
+# PROMPT ######################################################################
 
 autoload -U promptinit; promptinit
 prompt pure
