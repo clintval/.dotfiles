@@ -13,11 +13,13 @@
 		"subpixel_antialias",
 		"no_bold"
 	],
-	"font_size": 12,
+	"font_size": 11,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
+		"HTMLBeautify",
+		"Markdown",
 		"Vintage"
 	],
 	"rulers":
@@ -35,6 +37,7 @@
 	"theme": "Spacegray.sublime-theme",
 	"translate_tabs_to_spaces": true,
 	"trim_trailing_white_space_on_save": true,
+	"update-check": false,
 	"wide_caret": true,
 	"word_wrap": false,
 	"wrap_width": 80
