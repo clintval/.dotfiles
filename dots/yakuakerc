@@ -5,6 +5,7 @@ Frames=10
 TerminalHighlightOnManualActivation=true
 
 [Behavior]
+FocusFollowsMouse=false
 OpenAfterStart=true
 
 [Desktop Entry]
@@ -16,9 +17,10 @@ Favorites=
 [Window]
 Height=100
 KeepAbove=false
-KeepOpen=true
+KeepOpen=false
 Position=100
 Screen=1
 ShowOnAllDesktops=false
 ShowTabBar=false
+ToggleToFocus=true
 Width=100
