@@ -2,19 +2,21 @@
 
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=/home/clint/.oh-my-zsh
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 plugins=(
-    archlinux
-    battery
-    colored-man-pages
-    aws
-    git
-    systemd
-    taskwarrior
-    vagrant
-    zsh_reload)
+  archlinux
+  battery
+  colored-man-pages
+  aws
+  git
+  systemd
+  taskwarrior
+  vagrant
+  zsh_reload
+)
 
-fpath=( "$HOME/.zfunctions" $fpath )
+fpath=( "${HOME}/.zfunctions" $fpath )
 
 source "${ZSH}/oh-my-zsh.sh"
 
@@ -25,6 +27,11 @@ if [[ -n $SSH_CONNECTION ]]; then
 else
   export EDITOR='nano'
   export VISUAL='subl3'
+fi
+
+if [[ -d /usr/share/fzf/ ]]; then
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
 fi
 
 # ALIASES #####################################################################
