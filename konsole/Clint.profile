@@ -2,7 +2,7 @@
 AntiAliasFonts=true
 BoldIntense=true
 ColorScheme=PeacocksInSpace
-Font=Liberation Mono,11,-1,5,50,0,0,0,0,0,Regular
+Font=Droid Sans Mono,10.8,-1,5,50,0,0,0,0,0,Regular
 LineSpacing=1
 UseFontLineChararacters=true
 
@@ -22,7 +22,7 @@ UnderlineFilesEnabled=true
 
 [Scrolling]
 HistoryMode=2
-ScrollBarPosition=1
+ScrollBarPosition=2
 
 [Terminal Features]
 BlinkingCursorEnabled=true
