@@ -8,7 +8,6 @@ circos
 google-cloud-sdk
 htslib
 igv
-perl-cpanplus-dist-arch
 picard-tools
 primer3
 repeatmasker
