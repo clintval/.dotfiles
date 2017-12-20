@@ -3,7 +3,15 @@
       create: true
       relink: true
 
-- clean: ['~', '~/.config', '~/.local/share/konsole']
+- clean: ['~', '~/.config', '~/.local/share/konsole', '~/.config/systemd/user/']
+
+# Arch Linux solution to enable an ssh-agent to run on login
+- link:
+    ~/.config/systemd/user/ssh-agent.service: systemd/ssh-agent.service
+
+- shell:
+  - command: "systemctl --user --now enable ssh-agent"
+    description: Enabling `ssh-agent` service
 
 - shell:
   - command: "[ -d ~/Desktop ] && [ '$(ls -A ~/Desktop)' ] && rm -rf ~/Desktop || true"
@@ -24,6 +32,7 @@
 - link:
     ~/.gitconfig: dots/gitconfig
     ~/.pam_environment: dots/pam_environment
+    ~/.ssh/config: dots/sshconfig
     ~/.taskrc: dots/taskrc
     ~/.zshrc: dots/zshrc
     ~/.config/user-dirs.dirs: dots/user-dirs.dirs

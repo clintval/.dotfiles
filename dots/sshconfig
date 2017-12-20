@@ -1,0 +1,6 @@
+AddKeysToAgent  yes
+
+Host aur4.archlinux.org aur.archlinux.org
+  IdentityFile ~/.ssh/aur
+  IdentitiesOnly yes
+  User aur
