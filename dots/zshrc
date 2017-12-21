@@ -19,6 +19,7 @@ plugins=(
 fpath=( "${HOME}/.zfunctions" $fpath )
 
 source "${ZSH}/oh-my-zsh.sh"
+source /etc/profile
 
 # USER CONFIGURATION ##########################################################
 
