@@ -1,9 +1,15 @@
 - defaults:
     link:
       create: true
+      force: true
       relink: true
+      relative: false
 
 - clean: ['~', '~/.config', '~/.local/share/konsole', '~/.config/systemd/user/']
+
+# Secrets
+- link:
+    ~/.aws: secrets/aws
 
 # Arch Linux solution to enable an ssh-agent to run on login
 - link:
