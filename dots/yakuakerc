@@ -17,7 +17,7 @@ Favorites=
 [Window]
 Height=100
 KeepAbove=false
-KeepOpen=false
+KeepOpen=true
 Position=100
 Screen=1
 ShowOnAllDesktops=false
