@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+submit-to-queue() {
+  # Submit a config to initiate a pipeline run, accepts additional aws-cli args
+  if [[ -z $1 ]]; then print "USAGE: submit-to-queue <config>"; return 1; fi
+  local config="${1}" && shift
+  aws s3 cp "${config}" s3://twinstrand-queue/to-aws/ "${@}"
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+random-string() {
+  # Return a random string of length 32 by default
+  if [ $# -eq 0 ]; then length=32; else length="${1}"; fi
+  cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w "${length}" | head -n 1
+}

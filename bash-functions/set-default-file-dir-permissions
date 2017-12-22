@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+set-default-file-dir-permissions() {
+  # Set the recursive permissions of all files and directorys from cwd
+  find -type d | while read dirs; do chmod 755 "$dirs"; done
+  find -type f | while read files; do chmod 644 "$files"; done
+}

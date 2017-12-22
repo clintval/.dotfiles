@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 export PATH=$HOME/bin:/usr/local/bin:$PATH
 export ZSH=/home/clint/.oh-my-zsh
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
@@ -11,15 +10,13 @@ plugins=(
   aws
   git
   systemd
-  taskwarrior
-  vagrant
-  zsh_reload
 )
 
 fpath=( "${HOME}/.zfunctions" $fpath )
 
 source "${ZSH}/oh-my-zsh.sh"
 source /etc/profile
+source <( cat ~/.dotfiles/bash-functions/* )
 
 # USER CONFIGURATION ##########################################################
 
@@ -30,6 +27,7 @@ else
   export VISUAL='subl3'
 fi
 
+# If fzf is installed use those key-bindings and completions
 if [[ -d /usr/share/fzf/ ]]; then
   source /usr/share/fzf/key-bindings.zsh
   source /usr/share/fzf/completion.zsh
@@ -89,236 +87,16 @@ bindkey '\e[B' history-search-forward
 bindkey '\e[C' forward-char
 bindkey '\e[D' backward-char
 
-#Use [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+# Use [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
 bindkey '\t'  menu-complete
 bindkey '\e[Z' menu-complete-backward
 
 # HISTORY #####################################################################
 
+HISTCONTROL=ignoredups
 export HISTFILESIZE=20000
 export HISTSIZE=100000
-
-# Combine multiline commands into one in history
-# Ignore duplicates, ls without options and builtin commands
-HISTCONTROL=ignoredups
 export HISTIGNORE="&:ls:[bf]g:exit"
-
-# FUNCTIONS ###################################################################
-
-# Sudo the last command if failed otherwise sudo
-s() { # do sudo, or sudo the last command if no argument given
-    if [[ $# == 0 ]]; then
-        sudo $(history -p '!!')
-    else
-        sudo "$@"
-    fi
-}
-
-# Print the relative working directory
-relwd () {
-    echo "${PWD/#$HOME/~}"
-}
-
-
-# Get complement of uppercase DNA
-comp() {
-    echo $1 | tr ATCG TAGC
-}
-
-# Get reverse complement of uppercase DNA
-revcomp() {
-    echo $1 | rev | tr ATCGatcg TAGCtagc
-}
-
-# display a list of supported colors
-# From https://github.com/jleclanche/dotfiles
-function lscolors {
-    ((cols = $COLUMNS - 4))
-    s=$(printf %${cols}s)
-    for i in {000..$(tput colors)}; do
-        echo -e $i $(tput setaf $i; tput setab $i)${s// /=}$(tput op);
-    done
-}
-
-# Display a table of sequencers and associated costs
-function sequencing-cost {
-    curl "https://docs.google.com/spreadsheets/d/1GMMfhyLK0-q8XkIo3YxlWaZA5vVMuhU1kg41g4xLkXc/export?gid=4&format=csv" \
-        | grep -v '^#' \
-        | grep -v '^"' \
-        | column -t -s\, \
-        | less -S
-}
-
-# get the content type of an http resource
-# From https://github.com/jleclanche/dotfiles
-function htmime {
-    if [[ -z $1 ]]; then
-        print "USAGE: htmime <URL>"
-        return 1
-    fi
-    mime=$(curl -sIX HEAD $1 | sed -nr "s/Content-Type: (.+)/\1/p")
-    print $mime
-}
-
-# urlencode text
-# From https://github.com/jleclanche/dotfiles
-function urlencode {
-    print "${${(j: :)@}//(#b)(?)/%$[[##16]##${match[1]}]}"
-}
-
-# open a web browser on google for a query
-# From https://github.com/jleclanche/dotfiles
-function google {
-    xdg-open "https://www.google.com/search?q=`urlencode "${(j: :)@}"`"
-}
-
-# print a separator banner, as wide as the terminal
-# From https://github.com/jleclanche/dotfiles
-function hr {
-    print ${(l:COLUMNS::=:)}
-}
-
-# get public ip
-# From https://github.com/jleclanche/dotfiles
-function myip {
-    local api
-    case "$1" in
-        "-4")
-            api="http://v4.ipv6-test.com/api/myip.php"
-            ;;
-        "-6")
-            api="http://v6.ipv6-test.com/api/myip.php"
-            ;;
-        *)
-            api="http://ipv6-test.com/api/myip.php"
-            ;;
-    esac
-    curl -s "$api"
-    echo # Newline.
-}
-
-# Create short urls via http://goo.gl using curl(1).
-# Contributed back to grml zshrc
-# API reference: https://code.google.com/apis/urlshortener/
-# From https://github.com/jleclanche/dotfiles
-function zurl {
-    if [[ -z $1 ]]; then
-        print "USAGE: $0 <URL>"
-        return 1
-    fi
-
-    local url=$1
-    local api="https://www.googleapis.com/urlshortener/v1/url"
-    local data
-
-    # Prepend "http://" to given URL where necessary for later output.
-    if [[ $url != http(s|)://* ]]; then
-        url="http://$url"
-    fi
-    local json="{\"longUrl\": \"$url\"}"
-
-    data=$(curl --silent -H "Content-Type: application/json" -d $json $api)
-    # Match against a regex and print it
-    if [[ $data =~ '"id": "(http://goo.gl/[[:alnum:]]+)"' ]]; then
-        print $match
-    fi
-}
-
-# Opens the file using Gnome
-function open {
-    xdg-open ${@} > /dev/null 2>&1 &
-}
-
-function compute {
-    bc -l <<< ${@}
-}
-
-function tsv {
-    column -t -s $'\t' ${1} | less -JQi -# 15
-}
-
-function csv {
-    column -t -s $',' ${1} | less -JQi -# 15
-}
-
-
-function asciicast2gif {
-    sudo docker run --rm -v $PWD:/data asciinema/asciicast2gif
-}
-
-
-function fstabalign {
-    # usage: fstabalign [FILE]
-
-    # This script will output fstab or other file as column aligned.
-    # It will not alter blank lines or #hash comments.
-
-    if [ -z "$1" ]; then
-        FILE=$(cat /etc/fstab)
-    else
-        FILE=$(cat "$1")
-    fi
-
-    # Separate the file contents into aligned and unaligned parts.
-    OUT_ALIGNED=$(echo "$FILE" | sed 's/^\s*#.*//' | nl -ba | column -t)
-    OUT_UNALIGNED=$(echo "$FILE" | sed 's/^\s*[^#].*//' $src | nl -ba)
-
-    # Remerge aligned and unaligned parts.
-    while read; do
-        line_aligned="$REPLY"
-        read -u 3; line_unaligned="$REPLY"
-        line_aligned=$(  echo "$line_aligned"   | sed 's/\s*[0-9]*\s*//')
-        line_unaligned=$(echo "$line_unaligned" | sed 's/\s*[0-9]*\s*//')
-        echo "$line_aligned$line_unaligned"
-    done < <(echo "$OUT_ALIGNED") 3< <(echo "$OUT_UNALIGNED")
-}
-
-function random-string {
-    if [ $# -eq 0 ]; then
-        length=32
-    else
-        length="${1}"
-    fi
-
-    cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w "${length}" | head -n 1
-}
-
-function get-permissions {
-    find   \( -type f -a \( \( ! -group root -o ! -user root \) -o \( ! -perm 755 -a ! -perm 644 \) \) \) \
-        -o \( -type d -a \( ! -group root -o ! -user root -o ! -perm 755 \) \) \
-        | while read line; do stat -c "%u %g %a %n" $line ; done
-}
-
-function set-default-file-dir-permissions {
-    find -type d | while read dirs; do chmod 755 "$dirs"; done
-    find -type f | while read files; do chmod 644 "$files"; done
-}
-
-# BAM #########################################################################
-
-function sample-names-description-from-bam {
-    samtools view -H ${1} | grep "@RG" | sed -r 's/.*?(SM:\S*).*?(DS:[^\t]*)/\1\t\2/'
-}
-
-
-# BED #########################################################################
-
-function bedTotalLength {
-
-    if read -t 0; then
-        awk '{SUM += $3-$2} END {print SUM}'
-    else
-        awk '{SUM += $3-$2} END {print SUM}' < "${1}"
-    fi
-}
-
-# AWS #########################################################################
-
-function submit {
-    local config=${1}
-    shift
-    aws s3 cp ${config} s3://twinstrand-queue/to-aws/ ${@}
-}
 
 # PROMPT ######################################################################
 

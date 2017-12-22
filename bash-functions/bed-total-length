@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+bed-total-length() {
+  # Get the total length of all BED intervals in a BED file
+  if [[ -z $1 ]]; then print "USAGE: bed-total-length <BED>"; return 1; fi
+  if read -t 0; then
+    awk '{SUM += $3-$2} END {print SUM}'
+  else
+    awk '{SUM += $3-$2} END {print SUM}' < "${1}"
+  fi
+}

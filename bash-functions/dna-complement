@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+dna-complement() {
+  # Translate to the nucleotide complement of a given string
+  if [[ -z $1 ]]; then print "USAGE: dna-complement <DNA>"; return 1; fi
+  echo "${1}" | tr ATCGatcg TAGCtagc
+}

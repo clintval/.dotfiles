@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+less-tsv() {
+  # Render a tab-seperated file with the less pager
+  if [[ -z $1 ]]; then print "USAGE: less-tsv <file.tsv>"; return 1; fi
+  column -t -s $'\t' "${1}" | less -JQi -# 15
+}
