@@ -9,3 +9,6 @@ Host github.com
   IdentityFile ~/.ssh/github
   IdentitiesOnly yes
   User git
+
+Host *us-west-2.compute.amazonaws.com
+  ForwardAgent yes
