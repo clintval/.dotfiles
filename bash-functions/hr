@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+hr() {
+  # Print a horizontal rule in the terminal
+  # https://github.com/jleclanche/dotfiles
+  print "${(l:COLUMNS::=:)}"
+}

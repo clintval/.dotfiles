@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+sudo-last-command() {
+  # Sudo the last command if it failed, otherwise just sudo
+  if [[ $# == 0 ]]; then sudo $(history -p '!!'); else sudo "$@"; fi
+}

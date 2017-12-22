@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+relwd() {
+  # Echo the relative working directory
+  echo "${PWD/#$HOME/~}"
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+dna-reverse-complement() {
+  # Translate to the nucleotide reverse complement of a given string
+  if [[ -z $1 ]]; then print "USAGE: dna-reverse-complement <DNA>"; return 1; fi
+  echo "${1}" | rev | tr ATCGatcg TAGCtagc
+}

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+less-csv() {
+  # Render a comma-seperated file with the less pager
+  if [[ -z $1 ]]; then print "USAGE: less-csv <file.csv>"; return 1; fi
+  column -t -s $',' ${1} | less -JQi -# 15
+}

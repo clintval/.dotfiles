@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+function sequencers-and-cost {
+  # Display a table of sequencers and associated costs
+  curl "https://docs.google.com/spreadsheets/d/1GMMfhyLK0-q8XkIo3YxlWaZA5vVMuhU1kg41g4xLkXc/export?gid=4&format=csv" \
+    | grep -v '^#' \
+    | grep -v '^"' \
+    | column -t -s\, \
+    | less -S
+}

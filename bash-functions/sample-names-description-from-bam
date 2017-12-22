@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+sample-names-description-from-bam() {
+  # Print the sample name and descriptions of a BAM file
+  if [[ -z $1 ]]; then print "USAGE: sample-names-description-from-bam <BAM>"; return 1; fi
+  samtools view -H "${1}" \
+    | grep "@RG" \
+    | sed -r 's/.*?(SM:\S*).*?(DS:[^\t]*)/\1\t\2/'
+}

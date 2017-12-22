@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+myip() {
+  # Return the public IP of this machine
+  # https://github.com/jleclanche/dotfiles
+  local api
+  case "${1}" in
+    "-4")
+      api="http://v4.ipv6-test.com/api/myip.php"
+      ;;
+    "-6")
+      api="http://v6.ipv6-test.com/api/myip.php"
+      ;;
+    *)
+      api="http://ipv6-test.com/api/myip.php"
+      ;;
+  esac
+  curl -s "${api}" && echo
+}

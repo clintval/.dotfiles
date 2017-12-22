@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+http-mime-type() {
+  # Get the content type of an HTTP resource
+  # https://github.com/jleclanche/dotfiles
+  if [[ -z $1 ]]; then print "USAGE: http-mime-type <URL>"; return 1; fi
+  mime=$(curl -sIX HEAD $1 | sed -nr "s/Content-Type: (.+)/\1/p")
+  print $mime
+}
