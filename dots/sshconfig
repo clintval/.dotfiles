@@ -4,3 +4,8 @@ Host aur4.archlinux.org aur.archlinux.org
   IdentityFile ~/.ssh/aur
   IdentitiesOnly yes
   User aur
+
+Host github.com
+  IdentityFile ~/.ssh/github
+  IdentitiesOnly yes
+  User git
