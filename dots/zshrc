@@ -9,6 +9,7 @@ plugins=(
   colored-man-pages
   aws
   git
+  ssh-agent
   systemd
 )
 
@@ -32,6 +33,9 @@ if [[ -d /usr/share/fzf/ ]]; then
   source /usr/share/fzf/key-bindings.zsh
   source /usr/share/fzf/completion.zsh
 fi
+
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities aur github cv-sandbox.pem
 
 # ALIASES #####################################################################
 
