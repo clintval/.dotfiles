@@ -18,8 +18,8 @@
     ~/.aws: secrets/aws
 
 # Arch Linux solution to enable an ssh-agent to run on login
-- link:
-    ~/.config/systemd/user/ssh-agent.service: systemd/ssh-agent.service
+#- link:
+#    ~/.config/systemd/user/ssh-agent.service: systemd/ssh-agent.service
 
 - shell:
   - command: "systemctl --user --now enable ssh-agent"
