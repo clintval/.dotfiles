@@ -5,7 +5,7 @@
       relink: true
       relative: false
 
-- clean: ['~', '~/.config', '~/.local/share/konsole', '~/.config/systemd/user/']
+- clean: ['~', '~/.config']
 
 - shell:
   - command: oh-my-zsh/tools/install.sh
@@ -13,86 +13,11 @@
     stderr: true
     description: Installing oh-my-zsh
 
-# Secrets
-- link:
-    ~/.aws: secrets/aws
-
-# Arch Linux solution to enable an ssh-agent to run on login
-#- link:
-#    ~/.config/systemd/user/ssh-agent.service: systemd/ssh-agent.service
-
-#- shell:
-#  - command: "systemctl --user --now enable ssh-agent"
-#    description: Enabling `ssh-agent` service
-
-- shell:
-  - command: "[ -d ~/Desktop ] && [ '$(ls -A ~/Desktop)' ] && rm -rf ~/Desktop || true"
-    description: Trying to remove `Desktop`
-  - command: "[ -d ~/Documents ] && [ '$(ls -A ~/Documents)' ] && rm -rf ~/Documents || true"
-    description: Trying to remove `Documents`
-  - command: "[ -d ~/Music ] && [ '$(ls -A ~/Music)' ] && rm -rf ~/Music || true"
-    description: Trying to remove `Music`
-  - command: "[ -d ~/Pictures ] && [ '$(ls -A ~/Pictures)' ] && rm -rf ~/Pictures || true"
-    description: Trying to remove `Pictures`
-  - command: "[ -d ~/Public ] && [ '$(ls -A ~/Public)' ] && rm -rf ~/Public || true"
-    description: Trying to remove `Public`
-  - command: "[ -d ~/Templates ] && [ '$(ls -A ~/Templates)' ] && rm -rf ~/Templates || true"
-    description: Trying to remove `Templates`
-  - command: "[ -d ~/Videos ] && [ '$(ls -A ~/Videos)' ] && rm -rf ~/Videos || true"
-    description: Trying to remove `Videos`
-
 - link:
     ~/.gitconfig: dots/gitconfig
-#    ~/.pam_environment: dots/pam_environment
-#    ~/.ssh/config: dots/sshconfig
-    ~/.taskrc: dots/taskrc
     ~/.zshrc: dots/zshrc
     ~/.config/user-dirs.dirs: dots/user-dirs.dirs
-    ~/.config/yakuakerc: dots/yakuakerc
-
-- link:
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/bmc-pub7: sftp-servers/bmc-pub7.json
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/defiance: sftp-servers/defiance.json
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/rous: sftp-servers/rous.json
-    ~/.config/sublime-text-3/Packages/User/Package Control.sublime-settings: sublime-text-3/sublime-package-control-settings.json
-    ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings: sublime-text-3/sublime-user-preferences.json
-
-- link:
-    ~/.local/share/konsole/PeacocksInSpace.colorscheme: konsole/PeacocksInSpace.colorscheme
-    ~/.local/share/konsole/Clint.profile: konsole/Clint.profile
 
 - link:
     ~/.zfunctions/prompt_pure_setup: pure/pure.zsh
     ~/.zfunctions/async: pure/async.zsh
-
-# PEACOCKS IN SPACE
-# #26A6A6
-# #272b34
-# #2b303b
-# #6e7a94
-# #8998b9
-# #BCD42A
-# #dee3ec
-# #FF5D38
-
-# GOOD TERMINAL COLORSCHEME, would love to put in Konsole format.
-# foreground. rgb(46,52,54)
-# bold, rgb(239,41,41)
-# background, rgb(238,238,236)
-# palette
-#   rgb(157,34,34)
-#   rgb(204,0,0)
-#   rgb(131,215,52)
-#   rgb(196,160,0)
-#   rgb(52,101,164)
-#   rgb(117,80,123)
-#   rgb(149,149,149)
-#   rgb(211,215,207)
-#   rgb(85,87,83)
-#   rgb(239,41,41)
-#   rgb(30,111,231)
-#   rgb(71,136,232)
-#   rgb(31,102,207)
-#   rgb(173,127,168)
-#   rgb(255,0,0)
-#   rgb(238,238,236)

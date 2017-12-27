@@ -35,12 +35,12 @@ if [[ -d /usr/share/fzf/ ]]; then
 fi
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities aur github cv-sandbox.pem
+zstyle :omz:plugins:ssh-agent identities github cv-sandbox.pem
 
 # ALIASES #####################################################################
 
-alias zshconfig="subl3 ~/.zshrc"
-alias ohmyzsh="subl3 ~/.oh-my-zsh"
+alias zshconfig="${EDITOR} ~/.zshrc"
+alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
 
 alias cd..='cd ..'
 alias cp='cp -i'
