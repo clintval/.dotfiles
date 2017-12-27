@@ -7,6 +7,12 @@
 
 - clean: ['~', '~/.config', '~/.local/share/konsole', '~/.config/systemd/user/']
 
+- shell:
+  - command: oh-my-zsh/tools/install.sh
+    stdout: true
+    stderr: true
+    description: Installing oh-my-zsh
+
 # Secrets
 - link:
     ~/.aws: secrets/aws
@@ -54,12 +60,6 @@
 - link:
     ~/.local/share/konsole/PeacocksInSpace.colorscheme: konsole/PeacocksInSpace.colorscheme
     ~/.local/share/konsole/Clint.profile: konsole/Clint.profile
-
-- shell:
-  - command: oh-my-zsh/tools/install.sh
-    stdout: true
-    stderr: true
-    description: Installing oh-my-zsh
 
 - link:
     ~/.zfunctions/prompt_pure_setup: pure/pure.zsh
