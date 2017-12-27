@@ -43,8 +43,8 @@
 
 - link:
     ~/.gitconfig: dots/gitconfig
-    ~/.pam_environment: dots/pam_environment
-#   ~/.ssh/config: dots/sshconfig
+#    ~/.pam_environment: dots/pam_environment
+#    ~/.ssh/config: dots/sshconfig
     ~/.taskrc: dots/taskrc
     ~/.zshrc: dots/zshrc
     ~/.config/user-dirs.dirs: dots/user-dirs.dirs

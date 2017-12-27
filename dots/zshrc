@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export ZSH=/home/clint/.oh-my-zsh
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export ZSH=/home/${whoami}/.oh-my-zsh
+#export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 plugins=(
   archlinux
