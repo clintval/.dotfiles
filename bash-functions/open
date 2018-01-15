@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 open() {
   # Opens a resource using xdg-open silently
-  if [[ -z $1 ]]; then print "USAGE: zurl <file>"; return 1; fi
+  if [[ -z $1 ]]; then print "USAGE: open <file>"; return 1; fi
   xdg-open "${@}" > /dev/null 2>&1 &
 }
