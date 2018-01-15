@@ -1,4 +1,1 @@
 # Sensitive files handled by git-secret
-secrets/aws/config
-secrets/aws/credentials
-secrets/aws/s3fs-pass
