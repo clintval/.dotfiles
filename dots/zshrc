@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export ZSH=/home/${whoami}/.oh-my-zsh
+export ZSH=/home/$(whoami)/.oh-my-zsh
 #export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 plugins=(
@@ -35,7 +35,7 @@ if [[ -d /usr/share/fzf/ ]]; then
 fi
 
 zstyle :omz:plugins:ssh-agent agent-forwarding on
-zstyle :omz:plugins:ssh-agent identities github cv-sandbox.pem
+zstyle :omz:plugins:ssh-agent identities aur github cv-sandbox.pem
 
 # ALIASES #####################################################################
 
@@ -73,12 +73,8 @@ alias igv='igv > /dev/null 2>&1 &'
 alias xclip='xclip -selection c'
 
 alias cls=clear
-alias w3m='w3m -o ext_image_viewer=0'
 
 # BINDKEYS ####################################################################
-
-# bindkey '^[[6~  page down
-# bindkey '^[[2~  insert
 
 bindkey '^[[5~' beginning-of-history
 bindkey '^[[H'  beginning-of-line
