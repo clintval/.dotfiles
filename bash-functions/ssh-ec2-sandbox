@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+ssh-ec2-sandbox() {
+  ssh ec2-user@$( aws ec2 describe-instances --output text | grep cv-sandbox | cut -f15 )
+}
