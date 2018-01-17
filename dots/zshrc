@@ -18,6 +18,7 @@ fpath=( "${HOME}/.zfunctions" $fpath )
 source "${ZSH}/oh-my-zsh.sh"
 source /etc/profile
 source <( cat ~/.dotfiles/bash-functions/* )
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # USER CONFIGURATION ##########################################################
 
