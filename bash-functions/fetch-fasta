@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+fetch-fasta() {
+  # Fetch the necleotide sequences of given FASTA records using E-utilities
+  if [[ -z $1 ]]; then print "USAGE: fetch-fasta <ID[,ID...]>"; return 1; fi
+  wget -O "${1}".fa https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi\?db\=sequences\&id\="${@}"\&rettype\=fasta\&retmode\=text
+}
