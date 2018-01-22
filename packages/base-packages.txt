@@ -54,3 +54,4 @@ yaourt
 zsh
 s3fs
 zsh-autosuggestions
+direnv
