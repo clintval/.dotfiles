@@ -4,7 +4,3 @@ fa-to-bed() {
   if [[ -z $1 ]]; then print "USAGE: fa-to-bed <FASTA>"; return 1; fi
   bioawk -c fastx '{ print $name"\t0\t"length($seq) }' "${1}"
 }
-
-
-
-
