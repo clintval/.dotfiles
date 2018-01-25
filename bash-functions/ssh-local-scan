@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+ssh-local-scan() {
+  # Return a report of all IPs accepting SSH on port 22
+  if [[ -z $1 ]]; then print "USAGE: ssh-local-scan <IPv4 expression>"; return 1; fi
+  nmap -sS -p 22 "${@}" | grep -B 4 -A 1 open
+}
