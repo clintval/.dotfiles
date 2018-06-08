@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+ssh-master() {
+  instances=$( aws ec2 describe-instances --output json --filters "Name=tag:Name,Values=Master" )
+  ip=$( jq -r '.Reservations[0].Instances[0].NetworkInterfaces[0].Association.PublicIp' )
+  ssh ec2-user@"${ip}"
+}
+
+
+
+ssh-master() {
+  usage() { echo "USAGE: ssh-master -p default " 1>&2; exit; }
+
+  local OPTIND profile
+  while getopts ":p:" opt; do
+    case "${opt}" in
+      p )
+        profile="${OPTARG}"
+        ;;
+      * )
+        usage
+        ;;
+      esac
+  done
+  shift $((OPTIND-1))
+
+  if [ -z "${profile}" ] ; then profile=default ; fi
+
+}
+
+ssh-master "${@}"
