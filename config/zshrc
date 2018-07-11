@@ -1,0 +1,146 @@
+#!/usr/bin/env bash
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.miniconda3/bin:$PATH
+export ZSH=/home/$( whoami )/.oh-my-zsh
+
+plugins=(
+  archlinux
+  colored-man-pages
+  git
+  ssh-agent
+  systemd
+)
+
+# Set key press auto-repeat <delay rate> <repeat rate>.
+xset r on && xset r rate 225 45
+# Turn off the bell.
+xset b off
+
+fpath=( "${HOME}/.zfunctions" $fpath )
+
+source /etc/profile
+source "${ZSH}"/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source <( cat ~/.dotfiles/functions/* )
+eval "$(direnv hook zsh)"
+
+# USER CONFIGURATION ##########################################################
+
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='nano'
+  export VISUAL='nano'
+else
+  export EDITOR='nano'
+  export VISUAL='subl3'
+fi
+
+# If fzf is installed use those key-bindings and completions
+if [[ -d /usr/share/fzf/ ]]; then
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
+fi
+
+zstyle :omz:plugins:ssh-agent agent-forwarding on
+zstyle :omz:plugins:ssh-agent identities aur github cv-sandbox.pem
+
+# ALIASES #####################################################################
+
+alias zshconfig="${EDITOR} ~/.zshrc"
+alias ohmyzsh="${EDITOR} ~/.oh-my-zsh"
+
+alias cd..='cd ..'
+alias cp='cp -i'
+alias d='ls'
+alias df='df -h -x supermount'
+alias du='du -h'
+alias egrep='egrep --color'
+alias fgrep='fgrep --color'
+alias grep='grep --color'
+
+alias ls='ls -lhF --color=auto --group-directories-first'
+alias l='ls -lhF --color=auto --group-directories-first'
+alias la='ls -lhFa --color=auto --group-directories-first'
+alias lt='ls -lhFt --color=auto --group-directories-first'
+alias ld='ls -lhFd */ --color=auto --group-directories-first'
+alias lta='ls -lhFta --color=auto --group-directories-first'
+alias ltd='ls -lhFtd --color=auto --group-directories-first'
+
+alias md='mkdir'
+alias mv='mv -i'
+alias p='cd -'
+alias rd='rmdir'
+alias rm='rm -i'
+
+alias less='less -SF -# 15'
+
+alias .=source
+
+alias igv='igv > /dev/null 2>&1 &'
+alias xclip='xclip -selection c'
+
+alias cls=clear
+
+# BINDKEYS ####################################################################
+
+case "${TERM}" in
+  cons25*|linux) # plain BSD/Linux console
+    bindkey '\e[H'    beginning-of-line   # home 
+    bindkey '\e[F'    end-of-line         # end  
+    bindkey '\e[5~'   delete-char         # delete
+    bindkey '[D'      emacs-backward-word # esc left
+    bindkey '[C'      emacs-forward-word  # esc right
+    ;;
+  *rxvt*) # rxvt derivatives
+    bindkey '\e[3~'   delete-char         # delete
+    bindkey '\eOc'    forward-word        # ctrl right
+    bindkey '\eOd'    backward-word       # ctrl left
+    # workaround for screen + urxvt
+    bindkey '\e[7~'   beginning-of-line   # home
+    bindkey '\e[8~'   end-of-line         # end
+    bindkey '^[[1~'   beginning-of-line   # home
+    bindkey '^[[4~'   end-of-line         # end
+    ;;
+  *xterm*) # xterm derivatives
+    bindkey '\e[H'    beginning-of-line   # home
+    bindkey '\e[F'    end-of-line         # end
+    bindkey '\e[3~'   delete-char         # delete
+    bindkey '\e[1;5C' forward-word        # ctrl right
+    bindkey '\e[1;5D' backward-word       # ctrl left
+    # workaround for screen + xterm
+    bindkey '\e[1~'   beginning-of-line   # home
+    bindkey '\e[4~'   end-of-line         # end
+    ;;
+  screen)
+    bindkey '^[[1~'   beginning-of-line   # home
+    bindkey '^[[4~'   end-of-line         # end
+    bindkey '\e[3~'   delete-char         # delete
+    bindkey '\eOc'    forward-word        # ctrl right
+    bindkey '\eOd'    backward-word       # ctrl left
+    bindkey '^[[1;5C' forward-word        # ctrl right
+    bindkey '^[[1;5D' backward-word       # ctrl left
+    ;;
+esac
+
+# Use [Tab] and [Shift]+[Tab] to cycle through all the possible completions:
+bindkey '\t'  menu-complete
+bindkey '\e[Z' menu-complete-backward
+
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+
+# HISTORY #####################################################################
+
+HISTCONTROL=ignoredups
+export HISTFILESIZE=2000000
+export HISTSIZE=2000000
+export HISTIGNORE="&:ls:[bf]g:exit:clear:cls"
+
+# PROMPT ######################################################################
+
+autoload -U promptinit
+promptinit
+prompt pure

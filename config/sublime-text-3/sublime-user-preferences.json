@@ -13,20 +13,27 @@
 		"subpixel_antialias",
 		"no_bold"
 	],
+<<<<<<< HEAD:sublime-text-3/sublime-user-preferences.json
 	"font_size": 9,
+=======
+	"font_size": 10,
+>>>>>>> c846f2c... New and improved bind keys and bash functions (#2):config/sublime-text-3/sublime-user-preferences.json
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"HTMLBeautify",
-		"Markdown",
 		"Vintage"
 	],
 	"rulers":
 	[
 		72,
 		79,
+<<<<<<< HEAD:sublime-text-3/sublime-user-preferences.json
 		99
+=======
+		99,
+		135
+>>>>>>> c846f2c... New and improved bind keys and bash functions (#2):config/sublime-text-3/sublime-user-preferences.json
 	],
 	"scroll_past_end": false,
 	"show_encoding": true,
@@ -36,7 +43,11 @@
 	"spell_check": false,
 	"tab_size": 4,
 	"theme": "Spacegray.sublime-theme",
+<<<<<<< HEAD:sublime-text-3/sublime-user-preferences.json
 	"translate_tabs_to_spaces": true,
+=======
+	"translate_tabs_to_spaces": false,
+>>>>>>> c846f2c... New and improved bind keys and bash functions (#2):config/sublime-text-3/sublime-user-preferences.json
 	"trim_trailing_white_space_on_save": false,
 	"update-check": false,
 	"wide_caret": true,

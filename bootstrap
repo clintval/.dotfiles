@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -eou pipefail
+shopt -s globstar
+
+HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+git submodule init && git submodule update
+git submodule update --init --recursive submodules/dotbot
+
+"${HERE}"/submodules/dotbot/bin/dotbot -d "${HERE}" -c bootstrap.yaml "${@}"
