@@ -8,7 +8,7 @@
 - clean: ['~', '~/.config', '~/.local/share/konsole', '~/.config/systemd/user/']
 
 - shell:
-  - command: oh-my-zsh/tools/install.sh
+  - command: submodules/oh-my-zsh/tools/install.sh
     stdout: true
     stderr: true
     description: Installing oh-my-zsh
@@ -30,28 +30,25 @@
     description: Trying to remove `Videos`
 
 - link:
-    ~/.gitconfig: dots/gitconfig
-    ~/.pam_environment: dots/pam_environment
-    ~/.ssh/config: dots/sshconfig
-    ~/.taskrc: dots/taskrc
-    ~/.zshrc: dots/zshrc
-    ~/.config/user-dirs.dirs: dots/user-dirs.dirs
-    ~/.config/yakuakerc: dots/yakuakerc
+    ~/.gitconfig: config/gitconfig
+    ~/.pam_environment: config/pam_environment
+    ~/.ssh/config: config/sshconfig
+    ~/.taskrc: config/taskrc
+    ~/.zshrc: config/zshrc
+    ~/.config/user-dirs.dirs: config/user-dirs.dirs
+    ~/.config/yakuakerc: config/yakuakerc
 
 - link:
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/bmc-pub7: sftp-servers/bmc-pub7.json
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/defiance: sftp-servers/defiance.json
-    ~/.config/sublime-text-3/Packages/User/sftp_servers/rous: sftp-servers/rous.json
-    ~/.config/sublime-text-3/Packages/User/Package Control.sublime-settings: sublime-text-3/sublime-package-control-settings.json
-    ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings: sublime-text-3/sublime-user-preferences.json
+    ~/.config/sublime-text-3/Packages/User/Package Control.sublime-settings: config/sublime-text-3/sublime-package-control-settings.json
+    ~/.config/sublime-text-3/Packages/User/Preferences.sublime-settings: config/sublime-text-3/sublime-user-preferences.json
 
 - link:
-    ~/.local/share/konsole/PeacocksInSpace.colorscheme: konsole/PeacocksInSpace.colorscheme
-    ~/.local/share/konsole/Clint.profile: konsole/Clint.profile
+    ~/.local/share/konsole/PeacocksInSpace.colorscheme: config/konsole/PeacocksInSpace.colorscheme
+    ~/.local/share/konsole/Clint.profile: config/konsole/Clint.profile
 
 - link:
-    ~/.zfunctions/prompt_pure_setup: pure/pure.zsh
-    ~/.zfunctions/async: pure/async.zsh
+    ~/.zfunctions/prompt_pure_setup: submodules/pure/pure.zsh
+    ~/.zfunctions/async: submodules/pure/async.zsh
 
 # PEACOCKS IN SPACE
 # #26A6A6

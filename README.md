@@ -34,4 +34,4 @@ Toolchain:
 
 <h3 align="center">Screenshot</h3>
 
-![Sreenshot](screenshots/screenshot.jpg)
+![Sreenshot](docs/screenshot.jpg)

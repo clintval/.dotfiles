@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Decode and pretty-print sts message
+aws-sts-decode() {
+  if [[ -z $1 ]]; then echo "USAGE: aws-sts-decode <string>"; exit 1; fi
+  aws sts 
+    decode-authorization-message  \
+      --encoded-message "${1}" \
+    | jq '.[]' | sed -e 's/\\//g'  -e 's/^"//' -e 's/"$//' | jq
+}

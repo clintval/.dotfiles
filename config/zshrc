@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export ZSH=/home/$(whoami)/.oh-my-zsh
+export PATH=$HOME/.local/bin:$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/.miniconda3/bin:$PATH
+export ZSH=/home/$( whoami )/.oh-my-zsh
 
 plugins=(
   archlinux
@@ -10,25 +11,24 @@ plugins=(
   systemd
 )
 
+# Set key press auto-repeat <delay rate> <repeat rate>.
+xset r on && xset r rate 225 45
+# Turn off the bell.
+xset b off
+
 fpath=( "${HOME}/.zfunctions" $fpath )
 
-source "${ZSH}/oh-my-zsh.sh"
 source /etc/profile
-source <( cat ~/.dotfiles/bash-functions/* )
+source "${ZSH}"/oh-my-zsh.sh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source <( cat ~/.dotfiles/functions/* )
 eval "$(direnv hook zsh)"
-
-autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
-
-[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
-[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
 
 # USER CONFIGURATION ##########################################################
 
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='nano'
+  export VISUAL='nano'
 else
   export EDITOR='nano'
   export VISUAL='subl3'
@@ -57,13 +57,13 @@ alias egrep='egrep --color'
 alias fgrep='fgrep --color'
 alias grep='grep --color'
 
-alias ls='ls -lhF --color=auto'
-alias l='ls -lhF --color=auto '
-alias la='ls -lhFa --color=auto'
-alias lt='ls -lhFt --color=auto'
-alias ld='ls -lhFd */ --color=auto'
-alias lta='ls -lhFta --color=auto'
-alias ltd='ls -lhFtd --color=auto'
+alias ls='ls -lhF --color=auto --group-directories-first'
+alias l='ls -lhF --color=auto --group-directories-first'
+alias la='ls -lhFa --color=auto --group-directories-first'
+alias lt='ls -lhFt --color=auto --group-directories-first'
+alias ld='ls -lhFd */ --color=auto --group-directories-first'
+alias lta='ls -lhFta --color=auto --group-directories-first'
+alias ltd='ls -lhFtd --color=auto --group-directories-first'
 
 alias md='mkdir'
 alias mv='mv -i'
@@ -125,14 +125,22 @@ esac
 bindkey '\t'  menu-complete
 bindkey '\e[Z' menu-complete-backward
 
+autoload -Uz up-line-or-beginning-search down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+[[ -n "$key[Up]"   ]] && bindkey -- "$key[Up]"   up-line-or-beginning-search
+[[ -n "$key[Down]" ]] && bindkey -- "$key[Down]" down-line-or-beginning-search
+
 # HISTORY #####################################################################
 
 HISTCONTROL=ignoredups
-export HISTFILESIZE=20000
-export HISTSIZE=100000
-export HISTIGNORE="&:ls:[bf]g:exit"
+export HISTFILESIZE=2000000
+export HISTSIZE=2000000
+export HISTIGNORE="&:ls:[bf]g:exit:clear:cls"
 
 # PROMPT ######################################################################
 
-autoload -U promptinit; promptinit
+autoload -U promptinit
+promptinit
 prompt pure
